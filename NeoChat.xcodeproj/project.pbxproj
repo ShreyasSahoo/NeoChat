@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B169F6BD2EAB6AC900BE6BC5 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B169F6BC2EAB6AC900BE6BC5 /* SDWebImageSwiftUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		B1174F732EA8C1E700475FEE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B169F6BD2EAB6AC900BE6BC5 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +118,7 @@
 			);
 			name = NeoChat;
 			packageProductDependencies = (
+				B169F6BC2EAB6AC900BE6BC5 /* SDWebImageSwiftUI */,
 			);
 			productName = NeoChat;
 			productReference = B1174F652EA8C1E600475FEE /* NeoChat.app */;
@@ -196,6 +202,9 @@
 			);
 			mainGroup = B1174F5C2EA8C1E600475FEE;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B169F6BB2EAB6AC900BE6BC5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B1174F662EA8C1E600475FEE /* Products */;
 			projectDirPath = "";
@@ -615,6 +624,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B169F6BB2EAB6AC900BE6BC5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B169F6BC2EAB6AC900BE6BC5 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B169F6BB2EAB6AC900BE6BC5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B1174F5D2EA8C1E600475FEE /* Project object */;
 }
