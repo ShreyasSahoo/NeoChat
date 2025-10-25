@@ -36,6 +36,7 @@ struct IntroView: View {
                     .callToActionButton()
             }
         }
+        .toolbar(.hidden, for: .navigationBar)
         .padding(24)
     }
 }

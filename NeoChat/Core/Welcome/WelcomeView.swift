@@ -39,7 +39,7 @@ struct WelcomeView: View {
     private var buttonSection: some View {
         VStack {
             NavigationLink {
-                OnboardingCompletedView()
+                IntroView()
             } label: {
                 Text("Get Started")
                     .callToActionButton()
@@ -48,9 +48,10 @@ struct WelcomeView: View {
 
             Text("Already have an account? Sign in!")
                 .underline(true)
-                .padding(8)
+                .padding(28)
+                .background(.black.opacity(0.01))
                 .onTapGesture {
-
+                    print("Printed")
                 }
         }
     }
