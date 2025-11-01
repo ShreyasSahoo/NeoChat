@@ -33,7 +33,6 @@ struct CarouselView<Content: View, T: Hashable>: View {
                 ForEach(items, id: \.self) { item in
                         content(item)
                         .id(item)
-                        .frame(width: 300)
                         .padding(16)
                         .containerRelativeFrame(.horizontal, alignment: .center)
                         .scrollTransition(.interactive.threshold(.visible(0.95))) { content, phase in
@@ -47,6 +46,7 @@ struct CarouselView<Content: View, T: Hashable>: View {
         .scrollBounceBehavior(.basedOnSize)
         .scrollTargetLayout()
         .scrollTargetBehavior(.paging)
+        .frame(maxWidth: .infinity)
         .frame(height: 200)
         .scrollPosition(id: $selection)
         .onAppear {
