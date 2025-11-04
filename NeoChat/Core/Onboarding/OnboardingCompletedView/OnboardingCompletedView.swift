@@ -16,7 +16,7 @@ struct OnboardingCompletedView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 12){
+            VStack(alignment: .leading, spacing: 12) {
                 Text("Setup complete!")
                     .font(.largeTitle)
                     .fontWeight(.semibold)
@@ -38,10 +38,7 @@ struct OnboardingCompletedView: View {
     }
 
     private var ctaButton: some View {
-        Button {
-            onFinishButtonTapped()
-        } label: {
-            ZStack {
+        ZStack {
             if isCompleteingProfileSetup {
                 ProgressView()
                     .tint(Color.white)
@@ -49,7 +46,9 @@ struct OnboardingCompletedView: View {
                 Text("Finish")
             }
         }
-            .callToActionButton()
+        .callToActionButton()
+        .anyButton(.press) {
+            onFinishButtonTapped()
         }
         .disabled(isCompleteingProfileSetup)
     }

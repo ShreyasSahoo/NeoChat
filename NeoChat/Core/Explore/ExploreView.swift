@@ -11,12 +11,14 @@ struct ExploreView: View {
 
     @State private var featuredAvatars: [AvatarModel] = AvatarModel.mocks
     @State private var categories: [CharacterOption] = CharacterOption.allCases
+    @State private var popularAvatars: [AvatarModel] = AvatarModel.mocks
+
     var body: some View {
         NavigationStack {
             List {
                 featuredSection
                 categorySection
-
+                popularSection
             }
             .navigationTitle("Explore")
         }
@@ -31,10 +33,13 @@ struct ExploreView: View {
                         subtitle: avatar.characterDescription,
                         imageName: avatar.profileImageName
                     )
+                    .anyButton {
+                        print("Cell Tapped")
+                    }
                 }
             }.removeListFormatting()
         } header: {
-            Text("Featured Avatars")
+            Text("Featured")
         }
     }
 
@@ -44,6 +49,9 @@ struct ExploreView: View {
                     HStack(spacing: 12) {
                         ForEach(categories, id: \.self) { category in
                             CategoryCellView(image: Constants.randomImageURL, text: category.rawValue.capitalized)
+                                .anyButton {
+                                    print("Cell Tapped")
+                                }
                         }
                     }
                 }
@@ -54,6 +62,24 @@ struct ExploreView: View {
                 .removeListFormatting()
         } header: {
             Text("Categories")
+        }
+    }
+
+    private var popularSection: some View {
+        Section {
+            ForEach(popularAvatars, id: \.self) { avatar in
+                CustomListCellView(
+                    imageName: avatar.profileImageName,
+                    title: avatar.name,
+                    subtitle: avatar.characterDescription
+                )
+                .anyButton {
+                    print("Cell Tapped")
+                }
+            }
+            .removeListFormatting()
+        } header: {
+            Text("Popular")
         }
     }
 }
