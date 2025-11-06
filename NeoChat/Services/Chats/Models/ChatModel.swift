@@ -14,9 +14,9 @@ struct ChatModel: Identifiable {
     let dateCreated: Date
     let dateModified: Date
 
-    static var mock: ChatModel = mocks[0]
+    static var mock: Self = mocks[0]
 
-    static var mocks: [ChatModel] = [
+    static var mocks: [Self] = [
             ChatModel(
                 id: UUID().uuidString,
                 userId: "user_001",

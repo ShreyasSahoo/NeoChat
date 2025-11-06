@@ -20,9 +20,9 @@ struct ChatMessageModel {
         return seenByIds.contains(userId)
     }
 
-    static var mock: ChatMessageModel = mocks[0]
+    static var mock: Self = mocks[0]
 
-    static var mocks: [ChatMessageModel] = [
+    static var mocks: [Self] = [
         ChatMessageModel(
             id: UUID().uuidString,
             chatId: ChatModel.mocks[0].id,
