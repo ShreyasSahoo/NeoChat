@@ -45,7 +45,7 @@ struct HeroCellView: View {
 
 #Preview {
     ScrollView {
-        VStack(spacing: 16){
+        VStack(spacing: 16) {
             HeroCellView()
                 .frame(width: 350, height: 200)
 

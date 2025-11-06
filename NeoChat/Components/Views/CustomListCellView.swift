@@ -13,7 +13,7 @@ struct CustomListCellView: View {
     var subtitle: String? = "An Alien that is smiling in the park"
 
     var body: some View {
-        HStack(spacing: 8){
+        HStack(spacing: 8) {
             ZStack {
                 if let imageName {
                     ImageLoaderView(urlString: imageName)
