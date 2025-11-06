@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State var imageURL: String = Constants.randomImageURL
+    @State private var showSignInHalfCard: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -23,6 +24,10 @@ struct WelcomeView: View {
                 linksSection
 
             }
+        }
+        .sheet(isPresented: $showSignInHalfCard) {
+            CreateAccountView(title: "Sign in", subtitle: "Connect to an existing account.")
+                .presentationDetents([.medium])
         }
     }
 
@@ -51,7 +56,7 @@ struct WelcomeView: View {
                 .padding(28)
                 .background(.black.opacity(0.01))
                 .onTapGesture {
-                    print("Printed")
+                    onSignInTapped()
                 }
         }
     }
@@ -70,6 +75,10 @@ struct WelcomeView: View {
             }
         }
         .foregroundStyle(.accent)
+    }
+
+    private func onSignInTapped() {
+        showSignInHalfCard = true
     }
 }
 

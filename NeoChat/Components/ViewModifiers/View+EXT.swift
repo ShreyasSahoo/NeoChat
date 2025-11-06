@@ -30,4 +30,14 @@ extension View {
             LinearGradient(colors: [.black.opacity(0), .black.opacity(0.3), .black.opacity(0.4)], startPoint: .top, endPoint: .bottom)
         }
     }
+
+    func badgeButton() -> some View {
+        self
+            .font(.caption.bold())
+            .foregroundColor(.white)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
+            .background(Color.blue)
+            .cornerRadius(8)
+    }
 }
