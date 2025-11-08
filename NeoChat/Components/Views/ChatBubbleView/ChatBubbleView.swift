@@ -17,7 +17,7 @@ struct ChatBubbleView: View {
 
     var body: some View {
 
-        HStack(alignment: .top,spacing: 8) {
+        HStack(alignment: .top, spacing: 8) {
             if showImage {
                 ZStack {
                     if let imageName {

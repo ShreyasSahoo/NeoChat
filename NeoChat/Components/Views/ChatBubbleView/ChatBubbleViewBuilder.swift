@@ -17,7 +17,7 @@ struct ChatBubbleViewBuilder: View {
         ChatBubbleView(
             text: message.content,
             textColor: isCurrentUser ? .white : .primary,
-            backgroundColor: isCurrentUser ? .accent : Color(uiColor: .systemGray6) ,
+            backgroundColor: isCurrentUser ? .accent : Color(uiColor: .systemGray6),
             showImage: !isCurrentUser,
             imageName: imageName
         )
@@ -28,12 +28,12 @@ struct ChatBubbleViewBuilder: View {
 }
 
 #Preview {
-    VStack (spacing: 24) {
+    VStack(spacing: 24) {
         ChatBubbleViewBuilder(isCurrentUser: true)
         ChatBubbleViewBuilder()
-        ChatBubbleViewBuilder(message: .init(id: UUID().uuidString, chatId: UUID().uuidString, authorId: UUID().uuidString, content: "Hello World! This is a very long message that spans over mutliple lines! This actually wraps across multiple lines.", seenByIds: nil, dateCreated: .now), isCurrentUser: true)
+        ChatBubbleViewBuilder(message: .init(id: UUID().uuidString, chatId: UUID().uuidString, authorId: UUID().uuidString, content: "Hello World! This is a very long message that spans over mutliple lines! This actually wraps across  lines.", seenByIds: nil, dateCreated: .now), isCurrentUser: true)
 
-        ChatBubbleViewBuilder(message: .init(id: UUID().uuidString, chatId: UUID().uuidString, authorId: UUID().uuidString, content: "Hello World! This is a very long message that spans over mutliple lines! This actually wraps across multiple lines.", seenByIds: nil, dateCreated: .now))
+        ChatBubbleViewBuilder(message: .init(id: UUID().uuidString, chatId: UUID().uuidString, authorId: UUID().uuidString, content: "Hello World! This is a very long message that spans over mutliple lines! This actually wraps across  lines.", seenByIds: nil, dateCreated: .now))
     }
     .padding()
 }
