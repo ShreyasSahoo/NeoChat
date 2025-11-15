@@ -11,13 +11,15 @@ struct CategoryCellView: View {
     var image: String = Constants.randomImageURL
     var text: String = "Alien"
     var cornerRadius: CGFloat = 10
+    var font: Font = .headline
 
     var body: some View {
         ImageLoaderView(urlString: image)
             .aspectRatio(1, contentMode: .fit)
             .overlay(alignment: .bottomLeading) {
                 Text(text)
-                    .padding(8)
+                    .padding(12)
+                    .font(font)
                     .fontWeight(.semibold)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)

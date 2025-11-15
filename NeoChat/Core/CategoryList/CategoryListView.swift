@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct CategoryListView: View {
+    var category: CharacterOption = .alien
+    var imageName: String = Constants.randomImageURL
+    @State private var avatars: [AvatarModel] = AvatarModel.mocks
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            CategoryCellView(
+                image: imageName,
+                text: category.rawValue.capitalized,
+                cornerRadius: 0,
+                font: .largeTitle
+            )
+            .removeListFormatting()
+
+            ForEach(avatars, id: \.self) { avatar in
+                CustomListCellView(
+                    imageName: avatar.profileImageName,
+                    title: avatar.name,
+                    subtitle: avatar.characterDescription
+                )
+                .removeListFormatting()
+            }
+        }
+        .ignoresSafeArea()
+        .listStyle(PlainListStyle())
     }
 }
 
