@@ -11,6 +11,7 @@ struct CategoryListView: View {
     var category: CharacterOption = .alien
     var imageName: String = Constants.randomImageURL
     @State private var avatars: [AvatarModel] = AvatarModel.mocks
+    @Binding var path: [NavigationPathOption]
 
     var body: some View {
         List {
@@ -28,14 +29,21 @@ struct CategoryListView: View {
                     title: avatar.name,
                     subtitle: avatar.characterDescription
                 )
+                .anyButton(.highlight, action: {
+                    onAvatarPressed(avatar: avatar)
+                })
                 .removeListFormatting()
             }
         }
         .ignoresSafeArea()
         .listStyle(PlainListStyle())
     }
+
+    private func onAvatarPressed(avatar: AvatarModel) {
+        path.append(.chat(avatarId: avatar.avatarId))
+    }
 }
 
 #Preview {
-    CategoryListView()
+    CategoryListView(path: .constant([]))
 }
