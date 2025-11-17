@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import Firebase
 
 struct AppView: View {
     
     @State var appState: AppState = .init()
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @Environment(\.authService) var authService
 
     var body: some View {
         AppViewBuilder(
@@ -23,15 +22,26 @@ struct AppView: View {
                 WelcomeView()
             })
         .environment(appState)
+        .task {
+            await checkUserStatus()
+        }
     }
-}
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        FirebaseApp.configure()
+    private func checkUserStatus() async {
+        if let user = authService.getAuthenticatedUser() {
+            // User is authenticated
+            print("User already authenticated: \(user.uid)")
+        } else {
+            // User is not authenticated
+            do {
+                let result = try await authService.signInAnonymously()
 
-        return true
+            // log in to app
+                print("Signed in anonymously: \(result.user.uid)")
+            } catch {
+                print("ERROR: \(error)")
+            }
+        }
     }
 }
 
