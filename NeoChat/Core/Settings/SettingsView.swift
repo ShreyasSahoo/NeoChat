@@ -11,7 +11,7 @@ import SwiftfulUtilities
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(AppState.self) private var appState
-    @Environment(\.authService) private var authService
+    @Environment(AuthManager.self) var authManager
 
     @State private var isPremium: Bool = true
     @State private var isAnonymousUser: Bool = true
@@ -132,7 +132,7 @@ struct SettingsView: View {
     private func onSignOutTapped() {
         Task {
             do {
-                try authService.signOut()
+                try authManager.signOut()
             } catch {
                 showAlert = AnyAppAlert(error: error)
             }
@@ -173,7 +173,7 @@ struct SettingsView: View {
     private func onDeleteAccountConfirmed() {
         Task {
             do {
-                try await authService.deleteAccount()
+                try await authManager.deleteAccount()
             } catch {
                 showAlert = AnyAppAlert(error: error)
             }
@@ -186,7 +186,7 @@ struct SettingsView: View {
     }
 
     private func checkUserAnonymityStatus() {
-        isAnonymousUser = authService.getAuthenticatedUser()?.isAnonymous ?? true
+        isAnonymousUser = authManager.auth?.isAnonymous ?? true
     }
 }
 
@@ -203,18 +203,18 @@ fileprivate extension View {
 
 #Preview("Anonymous User") {
     SettingsView()
-        .environment(\.authService, MockAuthService(user: .mock(isAnonymous: true)))
+        .environment(AuthManager(service: MockAuthService(user: nil)))
         .environment(AppState())
 }
 
 #Preview("Signed IN User") {
     SettingsView()
-        .environment(\.authService, MockAuthService(user: .mock(isAnonymous: false)))
+        .environment(AuthManager(service: MockAuthService(user: .mock(isAnonymous: false))))
         .environment(AppState())
 }
 
 #Preview("No User") {
     SettingsView()
-        .environment(\.authService, MockAuthService(user: nil))
+        .environment(AuthManager(service: MockAuthService(user: .mock(isAnonymous: true))))
         .environment(AppState())
 }
