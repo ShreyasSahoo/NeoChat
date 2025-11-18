@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.Shreyas.NeoChat</string>
+	<string>com.ShreyShips.NeoChat</string>
 	<key>PROJECT_ID</key>
 	<string>neochat-proj</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:457141001928:ios:b4e90a3c364af336b90ffd</string>
+	<string>1:457141001928:ios:04f3989bd6c4ec37b90ffd</string>
 </dict>
 </plist>

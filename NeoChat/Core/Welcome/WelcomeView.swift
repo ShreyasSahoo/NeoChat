@@ -10,6 +10,7 @@ import SwiftUI
 struct WelcomeView: View {
     @State var imageURL: String = Constants.randomImageURL
     @State private var showSignInHalfCard: Bool = false
+    @Environment(AppState.self) private var root
 
     var body: some View {
         NavigationStack {
@@ -26,7 +27,13 @@ struct WelcomeView: View {
             }
         }
         .sheet(isPresented: $showSignInHalfCard) {
-            CreateAccountView(title: "Sign in", subtitle: "Connect to an existing account.")
+            CreateAccountView(
+                title: "Sign in",
+                subtitle: "Connect to an existing account.",
+                onDidSignIn: { isNewUser in
+                    handleDidSignIn(isNewUser: isNewUser)
+                }
+            )
                 .presentationDetents([.medium])
         }
     }
@@ -80,8 +87,15 @@ struct WelcomeView: View {
     private func onSignInTapped() {
         showSignInHalfCard = true
     }
+
+    private func handleDidSignIn(isNewUser: Bool) {
+        if !isNewUser {
+            root.updateViewState(true)
+        }
+    }
 }
 
 #Preview {
     WelcomeView()
+        .environment(AppState())
 }
