@@ -11,6 +11,7 @@ struct AppView: View {
     
     @State var appState: AppState = .init()
     @Environment(AuthManager.self) var authManager
+    @Environment(UserManager.self) var userManager
 
     var body: some View {
         AppViewBuilder(
@@ -38,6 +39,14 @@ struct AppView: View {
         if let user = authManager.auth {
             // User is authenticated
             print("User already authenticated: \(user.uid)")
+
+            do {
+                try userManager.logIn(auth: user, isNewUser: false)
+            } catch {
+                print("Failed to login to auth for existing user: \(error)")
+                try? await Task.sleep(for: .seconds(5))
+                await checkUserStatus()
+            }
         } else {
             // User is not authenticated
             do {
@@ -45,8 +54,14 @@ struct AppView: View {
 
             // log in to app
                 print("Signed in anonymously: \(result.user.uid)")
+
+            //Login
+                try userManager.logIn(auth: result.user, isNewUser: true)
+
             } catch {
-                print("ERROR: \(error)")
+                print("Failed to sign in anonymously and login: \(error)")
+                try? await Task.sleep(for: .seconds(5))
+                await checkUserStatus()
             }
         }
     }
