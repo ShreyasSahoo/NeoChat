@@ -9,11 +9,7 @@ import FirebaseAuth
 import SwiftUI
 import SignInAppleAsync
 
-extension EnvironmentValues {
-    @Entry var authService: FirebaseAuthService = FirebaseAuthService()
-}
-
-struct FirebaseAuthService {
+struct FirebaseAuthService: AuthService {
     func getAuthenticatedUser() -> UserAuthInfo? {
         if let user = Auth.auth().currentUser {
             return UserAuthInfo(user: user)
@@ -28,7 +24,7 @@ struct FirebaseAuthService {
     }
 
     func signInWithApple() async throws -> (user: UserAuthInfo, isNewUser: Bool) {
-        let helper = await SignInWithAppleHelper()
+        let helper = SignInWithAppleHelper()
         let response = try await helper.signIn()
 
         let credential = OAuthProvider.credential(
