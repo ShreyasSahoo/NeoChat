@@ -9,10 +9,12 @@ import SwiftUI
 
 struct ProfileView: View {
 
+    @Environment(UserManager.self) var userManager
+
     @State private var showSettings: Bool = false
     @State private var showCreateAvatarView: Bool = false
     @State private var isLoading: Bool = true
-    @State private var currentUser: UserModel? = .mock
+    @State private var currentUser: UserModel?
     @State private var myAvatars: [AvatarModel] = []
     @State private var path: [NavigationPathOption] = []
 
@@ -51,7 +53,7 @@ struct ProfileView: View {
     }
 
     private func loadData() async {
-        try? await Task.sleep(for: .seconds(3))
+        currentUser = userManager.currentUser
         isLoading = false
         myAvatars = AvatarModel.mocks
     }
@@ -123,7 +125,6 @@ struct ProfileView: View {
     }
 
     private func deleteAvatars(indexSet: IndexSet) {
-        guard let index = indexSet.first else { return }
         myAvatars.remove(atOffsets: indexSet)
     }
 
@@ -135,4 +136,5 @@ struct ProfileView: View {
 #Preview {
     ProfileView()
         .environment(AppState())
+        .environment(UserManager(service: MockUserService(user: .mock)))
 }
