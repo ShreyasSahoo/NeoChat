@@ -47,7 +47,11 @@ struct OnboardingCompletedView: View {
         
         Task {
             let hex = selectedColor.asHex()
-            try await userManager.markOnboardingCompletedForCurrentUser(profileColorHex: hex)
+            do {
+                try await userManager.markOnboardingCompletedForCurrentUser(profileColorHex: hex)
+            } catch {
+                print("ERROR: \(error)")
+            }
             isCompleteingProfileSetup = false
             root.updateViewState(true)
         }
@@ -57,5 +61,5 @@ struct OnboardingCompletedView: View {
 #Preview {
     OnboardingCompletedView(selectedColor: .teal)
         .environment(AppState())
-        .environment(UserManager(service: MockUserService()))
+        .environment(UserManager(services: MockUserServices(user: .mock)))
 }
